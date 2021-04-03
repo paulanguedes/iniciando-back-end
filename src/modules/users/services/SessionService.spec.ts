@@ -34,7 +34,7 @@ describe('SessionService', () => {
 
     const authenticateUser = new SessionService(fakeUsersRepository, fakeHashProvider);
 
-    expect(authenticateUser.execute({
+    await expect(authenticateUser.execute({
       email: 'janedoe@gmail.com',
       password: '123456'
     })).rejects.toBeInstanceOf(AppError);
@@ -53,7 +53,7 @@ describe('SessionService', () => {
       password: '123456'
     });
 
-    expect(authenticateUser.execute({
+    await expect(authenticateUser.execute({
       email: 'janedoe@gmail.com',
       password: 'wrongPassword'
     })).rejects.toBeInstanceOf(AppError);
