@@ -8,10 +8,11 @@ import UserAvatarController from '@modules/users/infra/http/controllers/UserAvat
 
 import ensureAuthentication from '@modules/users/infra/http/middlewares/ensureAuthentication';
 
-const usersRouter = Router();
-const upload = multer(uploadConfig);
 const usersController = new UsersController;
 const userAvatarController = new UserAvatarController;
+
+const upload = multer(uploadConfig);
+const usersRouter = Router();
 
 usersRouter.post('/', usersController.create);
 
