@@ -7,6 +7,7 @@ import UsersController from '@modules/users/infra/http/controllers/UsersControll
 import UserAvatarController from '@modules/users/infra/http/controllers/UserAvatarControlller';
 
 import ensureAuthentication from '@modules/users/infra/http/middlewares/ensureAuthentication';
+import { celebrate, Joi, Segments } from 'celebrate';
 
 const usersController = new UsersController;
 const userAvatarController = new UserAvatarController;
@@ -14,7 +15,15 @@ const userAvatarController = new UserAvatarController;
 const upload = multer(uploadConfig);
 const usersRouter = Router();
 
-usersRouter.post('/', usersController.create);
+usersRouter.post('/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    }
+  }),
+  usersController.create);
 
 usersRouter.patch('/avatar', ensureAuthentication, upload.single('avatar'), userAvatarController.update);
 
