@@ -14,12 +14,15 @@ describe('SessionService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
-    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
-    authenticateUser = new SessionService(fakeUsersRepository, fakeHashProvider);
+
+    authenticateUser = new SessionService(
+      fakeUsersRepository,
+      fakeHashProvider
+    );
   });
 
   it('should be able to authenticate user', async () => {
-    const user = await createUser.execute({
+    const user = await fakeUsersRepository.create({
       name: 'Jane Doe',
       email: 'janedoe@gmail.com',
       password: '123456'
@@ -35,14 +38,15 @@ describe('SessionService', () => {
   });
 
   it('should not be able to authenticate with non existing user', async () => {
-    await expect(authenticateUser.execute({
+    const user = await fakeUsersRepository.create({
+      name: 'Jane Doe',
       email: 'janedoe@gmail.com',
       password: '123456'
-    })).rejects.toBeInstanceOf(AppError);
+    });
   });
 
   it('should not be able to authenticate with wrong password', async () => {
-    await createUser.execute({
+    await fakeUsersRepository.create({
       name: 'Jane Doe',
       email: 'janedoe@gmail.com',
       password: '123456'
