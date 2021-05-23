@@ -1,71 +1,52 @@
-# Recuperação de senha
+![GoBarber Logo](/src/shared/Logo.png)
 
-**RF (Requisitos Funcionais)**
+![Badge](https://img.shields.io/static/v1?label=node.js&message=platform&color=green&style=for-the-badge)   ![Badge](https://img.shields.io/static/v1?label=react&message=framework&color=blue&style=for-the-badge)    ![Badge](https://img.shields.io/static/v1?label=react-native&message=framework&color=lightblue&style=for-the-badge)    ![Badge](https://img.shields.io/static/v1?label=PostgreSQL&message=database&color=darkblue&style=for-the-badge)    ![Badge](https://img.shields.io/static/v1?label=MongoDB&message=database&color=darkgreen&style=for-the-badge)   ![Badge](https://img.shields.io/static/v1?label=redis&message=cachebroker&color=darkred&style=for-the-badge)
+![Badge](https://img.shields.io/static/v1?label=docker&message=shipping&color=blue&style=for-the-badge)
 
-- O usuário deve poder recuperar a sua senha informando o seu e-mail;
-- O usuário deve receber um e-mail com instruções de Recuperação de senha;
-- O usuário deve poder resetar a sua senha.
+Aplicação desenvolvida no bootcamp GoStack, da Rocketseat. Desenvolvido com **Node.Js** no back-end, **React** no front-end e **React Native** no mobile.
 
-**RNF (Requisitos Não Funcionais)**
+[`Descrição`](#Descrição) - [`Funcionalidades`](#Funcionalidades) - [`Execução`](#Execução) - [`Pré-requisitos`](#Pré-requisitos) - [`Autoria`](#Autoria)
 
-- Utilizar Mailtrap para testar envios em ambiente de desenvolvimento;
-- Uitilizar Amazon SES para envios em produção;
-- O envio de e-mails deve acontecer em segundo plano (background job).
+# Descrição
 
-**RN (Regras de Negócio)**
+Uma plataforma para agendamento de horários com barbeiros e cabeleireiros.
 
-- O link enviado para resetar a senha deve expirar em duas horas;
-- O usuário precisa confirmar a nova senha ao resetá-la.
+# Funcionalidades
 
-# Atualização do perfil
+[✔️] Cadastro de usuário/profissional na aplicação;
+[✔️] Login de usuário/profissional;
+[✔️] Listagem de profissionais com os dias disponíveis para agendamento;
+[✔️] Listagem dos agendamentos de um profissional com o perfil do usuário que agendou;
+[✔️] Perfil do usuário com atualização dos dados e da foto de perfil;
+[✔️] Testes básicos na aplicação;
+[😟️] Deploy da aplicação.
 
-**RF (Requisitos Funcionais)**
+# Pré-requisitos
 
-- O usuário deve poder atualizar o seu nome, e-mail e senha;
+Essa aplicação utiliza o Docker para conexão com o Redis e com os bancos de dados PostgreSQL e MongoDB. Então, é necessário baixar e subir essas ferramentas para utilizar a aplicação. Também é necessário ter um emulador para abrir o aplicativo mobile.
 
-**RN (Regras de Negócio)**
+# Execução
 
-- O usuário não pode alterar o seu e-mail para um e-mail já utilizado na aplicação;
-- Para alterar a sua senha, o usuário deve informar a senha antiga;
-- Para atualizar a sua senha o usuário deve confirmar a sua senha.
+**Back-end**
+1. Baixe o projeto com o comando `git clone https://github.com/paulanguedes/iniciando-back-end.git`;
+2. No console rode o comendo `yarn` para baixar as dependências;
+3. Depois rode o comando para criar as migrations `yarn typeorm migration:run`;
+4. E, por fim, rode `yarn dev:server`.
 
-# Painel do prestador
+**Front-end**
+1. Baixe o projeto com o comando `git clone https://github.com/paulanguedes/gobarber-web.git`;
+2. No console rode o comendo `yarn` para baixar as dependências;
+4. Depois rode `yarn start` e pronto! Um aba do seu navegador padrão será aberta com a aplicação.
 
-**RF (Requisitos Funcionais)**
+**Mobile**
+1. Baixe o projeto com o comando `git clone https://github.com/paulanguedes/gobarberapp.git`;
+2. No console rode o comendo `yarn` para baixar as dependências;
+4. Rode `yarn react-native run-android` e depois `yarn react-native start`.
 
-- Prestador deve poder listar seus agendamentos de um dia específico;
-- Prestador deve receber notificação sempre que houver um novo agendamento;
-- Prestador deve poder visualizar as notificações não lidas.
+Para executar os testes nos três projetos, basta rodar `yarn test`. No front-end você consegue verificar a cobertura de testes com o comando `yarn test:coverage` e abrir o arquivo HTML na pasta *coverage*.
 
-**RNF (Requisitos Não Funcionais)**
+# Autoria
+O projeto e o seu tutorial é de autoria da [Rocketseat](https://rocketseat.com.br/) 🚀
 
-- Os agendamentos do prestador no dia devem ser armazenados em cache;
-- As notificações do prestador devem ser armazenadas no MongoDB;
-- As notificações do prestador devem ser enviadas em tempo real usando o Socket.io.
-
-**RN (Regras de Negócio)**
-
-- A notificação deve ter um status de lida ou não lida para que o prestador possa controlar.
-
-# Agendamento de serviços
-
-**RF (Requisitos Funcionais)**
-
-- O usuário deve poder listar todos os prestadores de serviços cadastrados;
-- O usuário deve poder visualizar os dias de um mês que têm, pelo menos, um horário disponível de determinado prestado;
-- O usuário deve poder listar os horários disponíveis em um dia específico de um determinado prestador;
-- Usuário deve poder realizar agendamento com um prestador.
-
-**RNF (Requisitos Não Funcionais)**
-
-- A listagem de prestadores deve ser armazenada em cache.
-
-**RN (Regras de Negócio)**
-
-- Cada agendamento deve durar uma hora;
-- Os agendamentos devem estar disponíveis entre 8h00 e 18h00:
-  - primeiro agendamento às 08h00
-  - último agendamento às 17h00;
-- Usuário não pode agendar em um horário já ocupado;
-- Usuário não pode agendar em um horário passado;
-- Usuário não pode agendar serviços com o seu perfil de prestador.
+A execução é minha mesmo [Paula Nogueira Guedes](https://www.linkedin.com/in/paulanguedes/) 😉️
+![Foto de perfil Paula Guedes!](https://media-exp1.licdn.com/dms/image/C4E03AQHUtqm11bt6tw/profile-displayphoto-shrink_200_200/0/1617747963262?e=1627516800&v=beta&t=6UomQ0YSG7AYDZBGHippzcs3bPm-NAexJrp2pb8_k54)
